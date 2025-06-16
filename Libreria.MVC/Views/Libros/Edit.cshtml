@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Codigo" class="control-label"></label>
-                <input asp-for="Codigo" class="form-control" />
+                <input asp-for="Codigo" class="form-control" readonly="readonly" />
                 <span asp-validation-for="Codigo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,18 +43,24 @@
                 <span asp-validation-for="CantidadEjemplares" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PaisCodigo" class="control-label"></label>
-                <input asp-for="PaisCodigo" class="form-control" />
+                <label asp-for="PaisCodigo" class="control-label">Elija País</label>
+                <select asp-for="PaisCodigo" class="form-control" asp-items="ViewBag.Paises">
+                    <option value="">-- Seleccione un país --</option>
+                </select>
                 <span asp-validation-for="PaisCodigo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AutorCodigo" class="control-label"></label>
-                <input asp-for="AutorCodigo" class="form-control" />
+                <label asp-for="AutorCodigo" class="control-label">Elija Autor</label>
+                <select asp-for="AutorCodigo" class="form-control" asp-items="ViewBag.Autores">
+                    <option value="">-- Seleccione un autor --</option>
+                </select>
                 <span asp-validation-for="AutorCodigo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EditorialCodigo" class="control-label"></label>
-                <input asp-for="EditorialCodigo" class="form-control" />
+                <label asp-for="EditorialCodigo" class="control-label">Elija Editorial</label>
+                <select asp-for="EditorialCodigo" class="form-control" asp-items="ViewBag.Editoriales">
+                    <option value="">-- Seleccione una editorial--</option>
+                </select>
                 <span asp-validation-for="EditorialCodigo" class="text-danger"></span>
             </div>
             <div class="form-group">

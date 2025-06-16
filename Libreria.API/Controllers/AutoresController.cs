@@ -31,6 +31,16 @@ namespace Libreria.API.Controllers
             return data;
         }
 
+        [HttpGet("pais/{id}")]
+        public async Task<ActionResult<IEnumerable<Autor>>> GetLibrosByPais(int id)
+        {
+            var data = await _context.Autores
+                .Where(e => e.PaisCodigo == id)
+                .Include(e => e.Pais)
+                .ToListAsync();
+
+            return data;
+        }
         // GET: api/Autores/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Autor>> GetAutor(int id)

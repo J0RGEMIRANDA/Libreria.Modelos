@@ -48,6 +48,51 @@
         </dd>
     </dl>
 </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha Nacimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var autor in Model.Autores)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-controller="Autores" asp-route-id="@autor.Codigo">@autor.Nombre @autor.Apellido</a>
+                </td>
+                
+                <td>
+                    @autor.FechaNacmiento
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Editorial</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var editorial in Model.Editoriales)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-controller="Editoriales" asp-route-id="@editorial.Codigo">@editorial.Nombre</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
 <div>
     @Html.ActionLink("Edit", "Edit", new { id  = Model.Codigo}) |
     <a asp-action="Index">Back to List</a>

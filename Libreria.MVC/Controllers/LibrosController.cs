@@ -2,6 +2,7 @@
 using Librerria.API.Consumer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libreria.MVC.Controllers
 {
@@ -18,13 +19,49 @@ namespace Libreria.MVC.Controllers
         public ActionResult Details(int id)
         { 
             var data = Crud<Libro>.GetById(id);
+            data.Pais = Crud<Pais>.GetById(data.PaisCodigo);
+            data.Editorial = Crud<Editorial>.GetById(data.EditorialCodigo);
+            data.Autor = Crud<Autor>.GetById(data.AutorCodigo);
             return View(data);
         }
 
         // GET: LibrosController/Create
         public ActionResult Create()
         {
+            ViewBag.Paises = GetPaises();
+            ViewBag.Autores = GetAutores();
+            ViewBag.Editoriales = GetEditoriales();
             return View();
+        }
+
+        private List<SelectListItem> GetPaises()
+        {
+            var paises = Crud<Pais>.GetAll();
+            return paises.Select(p => new SelectListItem
+            {
+                Value = p.Codigo.ToString(),
+                Text = p.Nombre
+            }).ToList();
+        }
+
+        private List<SelectListItem> GetAutores()
+        {
+            var autores = Crud<Autor>.GetAll();
+            return autores.Select(a => new SelectListItem
+            {
+                Value = a.Codigo.ToString(),
+                Text = a.Nombre
+            }).ToList();
+        }
+
+        private List<SelectListItem> GetEditoriales()
+        {
+            var editoriales = Crud<Editorial>.GetAll();
+            return editoriales.Select(p => new SelectListItem
+            {
+                Value = p.Codigo.ToString(),
+                Text = p.Nombre
+            }).ToList();
         }
 
         // POST: LibrosController/Create
@@ -48,6 +85,12 @@ namespace Libreria.MVC.Controllers
         public ActionResult Edit(int id)
         {
             var data = Crud<Libro>.GetById(id);
+            ViewBag.Paises = GetPaises();
+            ViewBag.Autores = GetAutores();
+            ViewBag.Editoriales = GetEditoriales();
+            data.Pais = Crud<Pais>.GetById(data.PaisCodigo);
+            data.Editorial = Crud<Editorial>.GetById(data.EditorialCodigo);
+            data.Autor = Crud<Autor>.GetById(data.AutorCodigo);
             return View(data);
         }
 
@@ -72,6 +115,9 @@ namespace Libreria.MVC.Controllers
         public ActionResult Delete(int id)
         {
             var data = Crud<Libro>.GetById(id);
+            data.Pais = Crud<Pais>.GetById(data.PaisCodigo);
+            data.Editorial = Crud<Editorial>.GetById(data.EditorialCodigo);
+            data.Autor = Crud<Autor>.GetById(data.AutorCodigo);
             return View(data);
         }
 

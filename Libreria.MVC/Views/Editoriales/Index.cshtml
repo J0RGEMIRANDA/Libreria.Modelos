@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaisCodigo)
+                Pais
             </th>
             <th></th>
         </tr>
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaisCodigo)
+                @Html.DisplayFor(modelItem => item.Pais.Nombre)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Codigo }) |
@@ -45,3 +45,9 @@
 }
     </tbody>
 </table>
+
+               
+Total registros: @ViewBag.TotalRegistros <br />
+Otra forma de contar: @Model.Count() <br />
+Total Libros: @ViewBag.TotalLibros <br />
+

@@ -31,6 +31,17 @@ namespace Libreria.API.Controllers
             return data;
         }
 
+        [HttpGet("pais/{id}")]
+        public async Task<ActionResult<IEnumerable<Editorial>>> GetLibrosByPais(int id)
+        {
+            var data = await _context.Editoriales
+                .Where(e => e.PaisCodigo == id)
+                .Include(e => e.Pais)
+                .ToListAsync();
+
+            return data;
+        }
+
         // GET: api/Editoriales/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Editorial>> GetEditorial(int id)
@@ -44,6 +55,7 @@ namespace Libreria.API.Controllers
 
             return editorial;
         }
+
 
         // PUT: api/Editoriales/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

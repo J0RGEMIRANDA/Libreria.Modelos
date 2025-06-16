@@ -18,6 +18,8 @@ namespace Libreria.MVC.Controllers
         public ActionResult Details(int id)
         {
             var data = Crud<Pais>.GetById(id);
+            data.Autores = Crud<Autor>.GetBy("pais", id);
+            data.Editoriales = Crud<Editorial>.GetBy("pais", id);
             return View(data);
         }
 

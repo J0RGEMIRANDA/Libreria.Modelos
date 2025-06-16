@@ -33,6 +33,36 @@ namespace Libreria.API.Controllers
             return data;
         }
 
+        // GET: api/Libros
+        [HttpGet("Editorial/{id}")]
+        public async Task<ActionResult<IEnumerable<Libro>>> GetLibrosByEditorial(int id) 
+        {
+            var data = await _context.Libros
+                .Where(l => l.EditorialCodigo == id)
+                .Include(l => l.Pais)
+                .Include(l => l.Autor)
+                .Include(l => l.Editorial)
+                .ToListAsync();
+
+            return data;
+
+        }
+
+        // GET: api/Libros
+        [HttpGet("autor/{id}")]
+        public async Task<ActionResult<IEnumerable<Libro>>> GetLibrosByAutor(int id)
+        {
+            var data = await _context.Libros
+                .Where(l => l.AutorCodigo == id)
+                .Include(l => l.Pais)
+                .Include(l => l.Autor)
+                .Include(l => l.Editorial)
+                .ToListAsync();
+
+            return data;
+
+        }
+
         // GET: api/Libros/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Libro>> GetLibro(int id)

@@ -2,6 +2,7 @@
 using Librerria.API.Consumer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libreria.MVC.Controllers
 {
@@ -18,15 +19,27 @@ namespace Libreria.MVC.Controllers
         public ActionResult Details(int id)
         {   
             var data= Crud<Autor>.GetById(id);
+            data.Libros = Crud<Libro>.GetBy("autor", id);
+            data.Pais = Crud<Pais>.GetById(data.PaisCodigo);
             return View(data);
         }
 
         // GET: AutoresController/Create
         public ActionResult Create()
         {   
+            ViewBag.Paises = GetPaises();
             return View();
         }
 
+        private List<SelectListItem> GetPaises()
+        {
+            var paises = Crud<Pais>.GetAll();
+            return paises.Select(p => new SelectListItem
+            {
+                Value = p.Codigo.ToString(),
+                Text = p.Nombre
+            }).ToList();
+        }
         // POST: AutoresController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,6 +61,8 @@ namespace Libreria.MVC.Controllers
         public ActionResult Edit(int id)
         {
             var data = Crud<Autor>.GetById(id);
+            ViewBag.Paises = GetPaises();
+            data.Pais = Crud<Pais>.GetById(data.PaisCodigo);
             return View(data);
         }
 
@@ -72,6 +87,7 @@ namespace Libreria.MVC.Controllers
         public ActionResult Delete(int id)
         {
             var data = Crud<Autor>.GetById(id);
+            data.Pais = Crud<Pais>.GetById(data.PaisCodigo);
             return View(data);
         }
 

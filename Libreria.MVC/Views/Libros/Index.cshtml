@@ -31,13 +31,13 @@
                 @Html.DisplayNameFor(model => model.CantidadEjemplares)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PaisCodigo)
+                País
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AutorCodigo)
+                Autor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EditorialCodigo)
+                Editorial
             </th>
             <th></th>
         </tr>
@@ -64,13 +64,13 @@
                 @Html.DisplayFor(modelItem => item.CantidadEjemplares)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaisCodigo)
+                @Html.DisplayFor(modelItem => item.Pais.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AutorCodigo)
+                @Html.DisplayFor(modelItem => item.Autor.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EditorialCodigo)
+                @Html.DisplayFor(modelItem => item.Editorial.Nombre)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Codigo}) |
